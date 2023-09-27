@@ -1,0 +1,52 @@
+<%- include ('partials/header') %>
+
+    <h3>Modify Directory Name</h3>
+
+    <form method="get" >
+		
+		<!-- File Path -->
+        <div>
+			<label style = "font-weight: bold" for="file_path">File Path:</label>
+		</div>
+        <div>
+			<textarea name="file_path" id="file_path" rows=1 cols=40 wrap="soft" required >C:\Users\thoma\Documents\Manga\~DL Manga</textarea>
+		</div>
+		
+
+		<!-- Contains Text -->
+        <div>
+			<label style = "font-weight: bold" for="contains_text">Modify Text with:</label>
+		</div>
+        <div>
+			<textarea name="contains_text" id="contains_text" rows=1 cols=40 wrap="soft" ></textarea>
+		</div>
+
+		
+		<!-- Text to remove -->
+        <div>
+			<label style = "font-weight: bold" for="text_to_remove">Text to remove from file name:</label>
+		</div>
+        <div>
+			<textarea name="text_to_remove" id="text_to_remove" rows=1 cols=40 wrap="soft" required >[FMTEAM]</textarea>
+		</div>
+
+
+		<!-- Modify Text with -->
+        <div>
+			<label style = "font-weight: bold" for="modify_with">Modify Text with:</label>
+		</div>
+        <div>
+			<textarea name="modify_with" id="modify_with" rows=1 cols=40 wrap="soft" ></textarea>
+		</div>
+		
+		
+		<!-- Submit buttons -->
+        <div>
+            <input type="submit" id="bt_modify" value="Modify File Name" />
+            <input type="button" value="Reset" onClick="this.form.reset()" />
+        </div>
+    </form>
+
+	<div id="log"></div>
+    
+<%- include ('partials/footer') %>
