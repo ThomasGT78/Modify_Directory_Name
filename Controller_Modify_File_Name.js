@@ -35,35 +35,36 @@ app.get('/', function (req, res) {
     let contains_text = req.query.contains_text;	// Stock the text that must be contained in file names
     let text_to_remove = req.query.text_to_remove;	// Stock the text to replace
     let modify_with = req.query.modify_with;	// Stock the replacement text
-	
+    
     if (!contains_text){ // Check if the file name contains the text to replace
         // empty => use text_to_remove value
         contains_text = text_to_remove;
     }
     
-    // Read the files existing in the folder choosen
-    fs.readdir(file_path, (err, files) => {
-        // Iterate through the file list from the folder
-        files.forEach(name => {
-            // Select the files including the text to remove
-            if (name.includes(contains_text) && name.includes(text_to_remove)){
-                // recreate the full path of each file
-                let current_path = file_path + "\\" + name // « \\ » is to write only « \ » but you need to escape the character
-                
-                new_name = name.replace(text_to_remove, modify_with)
-                let new_path = file_path + "\\" + new_name
-                fs.rename(current_path, new_path, function(err) {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        console.log(name + ": Successfully renamed as => " + new_name);
-                    }
-                }) // fs.rename
-            } // end if
-        }) // END files.forEach
+    if (file_path){
+        // Read the files existing in the folder choosen
+        fs.readdir(file_path, (err, files) => {
+            // Iterate through the file list from the folder
+            files.forEach(name => {
+                // Select the files including the text to remove
+                if (name.includes(contains_text) && name.includes(text_to_remove)){
+                    // recreate the full path of each file
+                    let current_path = file_path + "\\" + name // « \\ » is to write only « \ » but you need to escape the character
+                    
+                    new_name = name.replace(text_to_remove, modify_with)
+                    let new_path = file_path + "\\" + new_name
+                    fs.rename(current_path, new_path, function(err) {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            console.log(name + ": Successfully renamed as => " + new_name);
+                        }
+                    }) // fs.rename
+                } // end if
+            }) // END files.forEach
 
-    }) // fs.readdir
-        
+        }) // fs.readdir
+    } // end if file_path
     
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8'); // Set content type header
